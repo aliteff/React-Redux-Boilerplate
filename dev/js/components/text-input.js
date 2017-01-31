@@ -3,11 +3,6 @@ import _ from 'lodash';
 
 class TextInput extends Component {
 
-
-	// static propTypes = {
- //    	label: React.PropTypes.string
- //  	};
-
 	constructor(props){
 		super(props);
 	}
