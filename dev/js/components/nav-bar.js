@@ -37,6 +37,7 @@ class NavBar extends Component {
 
                             <li className=""><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
                             <li><NavLink to="/users">Users</NavLink></li>
+                            <li><NavLink to="/json-editor">JSON Editor</NavLink></li>
 
                       	</ul>
                     </div>

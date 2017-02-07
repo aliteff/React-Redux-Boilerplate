@@ -4,7 +4,7 @@ import App from './app';
 import Home from './home';
 import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-detail';
-
+import JsonEditor from '../containers/json-editor';
 
 const Routes = () => {
 	return (
@@ -14,6 +14,9 @@ const Routes = () => {
 				<Route name='Users' path="users">
 					<IndexRoute component={UserList} />
 					<Route name='UserID' path=":userID" component={UserDetail} />
+				</Route>
+				<Route name='JSON Editor' path="json-editor">
+					<IndexRoute component={JsonEditor} />
 				</Route>
 			</Route>
 		</Router>
