@@ -4,13 +4,26 @@ import {connect} from 'react-redux';
 import {editUserInfo} from '../actions/index';
 import TextInput from '../components/text-input';
 import Immutable, {Map} from 'immutable';
-
+import JSONTree from 'react-json-tree'
 
 class JsonEditor extends Component {
 
 	constructor(props) {
 		super(props);
-	}
+
+		this.state = {
+			json: {
+				array: [1, 2, 3],
+		  		bool: true,
+		  		object: {
+		    		foo: 'bar'
+		  		},
+		  		immutable: Map({ key: 'value' })
+			}
+		};
+
+
+	};
 
 	render() {
 		return (
@@ -20,7 +33,9 @@ class JsonEditor extends Component {
                     <div className="panel-heading">
                         <h3 className='panel-title'>Editor</h3>
                     </div>
-                    <div className="panel-body"></div>
+                    <div className="panel-body">
+						<JSONTree data={this.state.json} />
+                    </div>
                 </div>
 			</div>
 		);
