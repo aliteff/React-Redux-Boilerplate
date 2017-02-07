@@ -182,7 +182,7 @@ class UserDetail extends Component {
     }
 }
 
-/****** REDUX METHODS ******/
+/****** REDUX FUNCTIONS ******/
 
 function mapStateToProps(state) {
     return {

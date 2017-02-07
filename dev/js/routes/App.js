@@ -16,13 +16,14 @@ class App extends Component{
     render(){
         return(
             <div>
-                <NavBar
-                    routes={this.props.routes} />
+                <NavBar routes={this.props.routes} />
 
                 <div className='container' id="main-content">
                     <Breadcrumbs
                         routes={this.props.routes}
                         params={this.props.params} />
+
+                    <hr/>
 
                     {this.props.children}
                 </div>
