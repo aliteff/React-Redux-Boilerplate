@@ -10,19 +10,6 @@ class JsonEditor extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			json: {
-				array: [1, 2, 3],
-		  		bool: true,
-		  		object: {
-		    		foo: 'bar'
-		  		},
-		  		immutable: Map({ key: 'value' })
-			}
-		};
-
-
 	};
 
 	render() {
@@ -34,7 +21,7 @@ class JsonEditor extends Component {
                         <h3 className='panel-title'>Editor</h3>
                     </div>
                     <div className="panel-body">
-						<JSONTree data={this.state.json} />
+						<JSONTree data={this.props} />
                     </div>
                 </div>
 			</div>
