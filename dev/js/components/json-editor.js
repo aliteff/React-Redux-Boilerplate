@@ -2,12 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import JSONEditor from 'jsoneditor/dist/jsoneditor';
 
 /**
- * Documentation for properties can be found
+ * Documentation for options can be found
  * here: https://github.com/josdejong/jsoneditor/blob/master/docs/api.md
  */
 
 const PROP_TYPES = {
-	// style: PropTypes.object,
 	mode: PropTypes.string,
 	modes: PropTypes.array,
 	indentation: PropTypes.number,
@@ -29,67 +28,51 @@ class JsonEditor extends Component {
 
 	constructor(props) {
 		super(props);
-		this.onChangeCustom = this.onChangeCustom.bind(this);
 		this.editor = {};
-		this.container = {};
+		this.handleChange = this.handleChange.bind(this);
 	}
 
-	onChangeCustom(onChange) {
-		return onChange;
-	}
-
-	componentWillMount() {
-
-		this.container = document.createElement('div');
-
-		/**** Figure this out ****/
-		this.container.setAttribute("style", 'height:500px');
-		/**** Figure this out ****/
-
-    	const { mode, modes, indentation, json, ace, ajv,
-    		onChange, onEditable, onModeChange, escapeUnicode,
-    		sortObjectKeys, history, name, schema, search
-    	} = this.props;
-
-    	const options = {
-    		mode: mode || 'text',
-    		modes: modes || ['text', 'tree'],
-    		indentation: indentation || 4,
-    		ace,
-    		ajv,
-    		onChange: this.onChangeCustom(onChange),
-    		onEditable,
-    		onModeChange,
-    		escapeUnicode,
-    		sortObjectKeys,
-    		history,
-    		name,
-    		schema,
-    		search
-    	};
-
-        this.editor = new JSONEditor(this.container, options);
+	handleChange() {
+		const json = this.editor.get();
+		this.props.onChange(json);
 	}
 
 	componentDidMount() {
+		const container = this.refs.container;
+		const { mode, modes, indentation, json, ace, ajv,
+			onEditable, onModeChange, escapeUnicode,
+			sortObjectKeys, history, name, schema, search
+		} = this.props;
 
-		this.refs.container.appendChild(this.container);
-        this.editor.set(this.props.json);
-    }
+		const options = {
+			mode: mode || 'text',
+			modes: modes || ['text', 'tree'],
+			indentation: indentation || 4,
+			ace,
+			ajv,
+			onChange: this.handleChange,
+			onEditable,
+			onModeChange,
+			escapeUnicode,
+			sortObjectKeys,
+			history,
+			name,
+			schema,
+			search
+		};
 
-
-
-	render() {
-
-		return (
-			<div
-				// {...this.props}
-				className="json-editor-wrapper"
-				ref="container"></div>
-
-		);
+		this.editor = new JSONEditor(container, options);
+		this.editor.set(this.props.json);
 	}
 
+	render() {
+		return (
+			<div
+				style={this.props.style || {width:'100%', height:'500px'}}
+				className={`json-editor-wrapper ${this.props.className}`}
+				ref="container"></div>
+		);
+	}
 }
 
 JsonEditor.propTypes = PROP_TYPES;
